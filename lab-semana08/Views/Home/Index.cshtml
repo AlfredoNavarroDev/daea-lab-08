@@ -1,0 +1,72 @@
+@{
+    ViewData["Title"] = "Inicio";
+}
+
+<section class="hero text-center py-5 mb-4 rounded-4 px-3">
+    <h1 class="display-5 fw-bold mb-2">Biblioteca</h1>
+    <p class="lead mb-0">Gestiona libros, socios y préstamos desde un solo lugar.</p>
+</section>
+
+<div class="row text-center g-3 mb-4">
+    <div class="col-md-4">
+        <div class="stat-card rounded-3 p-3 h-100">
+            <div class="stat-number">@ViewBag.LibrosActivos</div>
+            <div class="text-muted">Libros activos</div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="stat-card rounded-3 p-3 h-100">
+            <div class="stat-number">@ViewBag.SociosActivos</div>
+            <div class="text-muted">Socios activos</div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="stat-card rounded-3 p-3 h-100">
+            <div class="stat-number">@ViewBag.PrestamosPendientes</div>
+            <div class="text-muted">Préstamos pendientes</div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-4">
+        <div class="feature-card card h-100 p-3 d-flex flex-column">
+            <svg class="feature-icon mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+            </svg>
+            <h5 class="card-title">Libros</h5>
+            <p class="card-text text-muted">Catálogo de libros, búsqueda por título y gestión completa.</p>
+            <a asp-controller="Libros" asp-action="Index" class="btn btn-outline-primary mt-auto">Ver libros</a>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="feature-card card h-100 p-3 d-flex flex-column">
+            <svg class="feature-icon mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+            <h5 class="card-title">Socios</h5>
+            <p class="card-text text-muted">Registro de los socios de la biblioteca.</p>
+            <a asp-controller="Socios" asp-action="Index" class="btn btn-outline-primary mt-auto">Ver socios</a>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="feature-card card h-100 p-3 d-flex flex-column">
+            <svg class="feature-icon mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                <line x1="16" y1="2" x2="16" y2="6" />
+                <line x1="8" y1="2" x2="8" y2="6" />
+                <line x1="3" y1="10" x2="21" y2="10" />
+            </svg>
+            <h5 class="card-title">Préstamos</h5>
+            <p class="card-text text-muted">Registra nuevos préstamos y consulta el reporte por fechas.</p>
+            <div class="d-flex gap-2 mt-auto">
+                <a asp-controller="Prestamos" asp-action="Create" class="btn btn-primary">Nuevo préstamo</a>
+                <a asp-controller="Prestamos" asp-action="Reporte" class="btn btn-outline-primary">Reporte</a>
+            </div>
+        </div>
+    </div>
+</div>

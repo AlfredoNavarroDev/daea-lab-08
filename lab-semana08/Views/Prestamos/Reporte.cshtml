@@ -1,0 +1,74 @@
+@model IEnumerable<lab_semana08.Models.PrestamoReporte>
+
+@{
+    ViewData["Title"] = ViewData["Title"] ?? "Reporte de préstamos";
+}
+
+<h1>Reporte de préstamos</h1>
+
+@if (TempData["Mensaje"] is string mensaje)
+{
+    <div class="alert alert-success">@mensaje</div>
+}
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Nuevo préstamo</a>
+</p>
+
+<form asp-action="Reporte" method="get" class="row g-2 mb-3">
+    <div class="col-auto">
+        <label class="form-label" for="desde">Desde</label>
+        <input type="date" id="desde" name="desde" value="@ViewData["Desde"]" class="form-control" />
+    </div>
+    <div class="col-auto">
+        <label class="form-label" for="hasta">Hasta</label>
+        <input type="date" id="hasta" name="hasta" value="@ViewData["Hasta"]" class="form-control" />
+    </div>
+    <div class="col-auto align-self-end">
+        <button type="submit" class="btn btn-outline-secondary">Filtrar</button>
+    </div>
+</form>
+
+<table class="table table-striped align-middle">
+    <thead>
+        <tr>
+            <th>Socio</th>
+            <th>Libro</th>
+            <th>Fecha límite</th>
+            <th>Estado</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.SocioNombre</td>
+                <td>@item.LibroTitulo</td>
+                <td>@item.FechaLimite.ToString("dd/MM/yyyy")</td>
+                <td>
+                    @if (item.Estado == "Pendiente")
+                    {
+                        <span class="badge bg-warning text-dark">Pendiente</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-success">Devuelto</span>
+                    }
+                </td>
+                <td class="text-end">
+                    @if (item.Estado == "Pendiente")
+                    {
+                        <form asp-action="Devolver" method="post" class="d-inline">
+                            <input type="hidden" name="prestamoId" value="@item.PrestamoId" />
+                            <input type="hidden" name="libroId" value="@item.LibroId" />
+                            <input type="hidden" name="desde" value="@ViewData["Desde"]" />
+                            <input type="hidden" name="hasta" value="@ViewData["Hasta"]" />
+                            <button type="submit" class="btn btn-sm btn-outline-success">Marcar devuelto</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

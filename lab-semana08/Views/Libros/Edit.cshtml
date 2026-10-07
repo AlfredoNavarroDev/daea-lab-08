@@ -1,0 +1,41 @@
+@model lab_semana08.Models.Libro
+
+<h1>Editar libro</h1>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="LibroId" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Titulo" class="form-label"></label>
+        <input asp-for="Titulo" class="form-control" />
+        <span asp-validation-for="Titulo" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ISBN" class="form-label"></label>
+        <input asp-for="ISBN" class="form-control" />
+        <span asp-validation-for="ISBN" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="AutorId" class="form-label"></label>
+        <select asp-for="AutorId" asp-items="ViewBag.Autores as SelectList" class="form-select">
+            <option value="">-- Seleccione un autor --</option>
+        </select>
+        <span asp-validation-for="AutorId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Ejemplares" class="form-label"></label>
+        <input asp-for="Ejemplares" class="form-control" />
+        <span asp-validation-for="Ejemplares" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
